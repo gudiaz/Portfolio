@@ -36,6 +36,10 @@
         button {
             margin: 2px;
         }
+
+        img {
+        	width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -59,10 +63,10 @@
                     <div class="col-lg-4"></div>
                 </div>
 				<div class="row" id="images">
-					<div class="col-lg-4" id="first-row"></div>
-					<div class="col-lg-4" id="second-row"></div>
-					<div class="col-lg-4" id="third-row"></div>
-					<div class="col-lg-4" id="four-row"></div>
+					<div class="col-lg-4" id="first-col"></div>
+					<div class="col-lg-4" id="second-col"></div>
+					<div class="col-lg-4" id="third-col"></div>
+					<div class="col-lg-4" id="four-col"></div>
 				</div>            
 			</form>
         </div>
@@ -103,13 +107,13 @@
 		            var img = '<img src="' + imgArray.data[i].images.fixed_height.url + '" alt="" class="img-rounded">';
 
 					if (i == 3) {
-					 $("#first-row").append(img);  
+					 $("#first-col").append(img);  
 					} else if (i == 6) {
-					    $("#second-row").append(img);
+					    $("#second-col").append(img);
 					} else if (i == 9) {
-					    $("#third-row").append(img);
+					    $("#third-col").append(img);
 					} else if (i == 12) {
-					    $("#four-row").append(img);
+					    $("#four-col").append(img);
 					}
 		            images.append("<div class='col-lg-4'><h4>Rated: " + imgArray.data[i].rating + "</h4>" + img + '</div>');
 		        }
