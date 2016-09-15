@@ -104,7 +104,11 @@
                 images.empty();
 
                 for (var i = 0; i < 12; i++) {
-		            var img = '<img src="' + imgArray.data[i].images.fixed_height.url + '" alt="" class="img-rounded">';
+		            var img = '<img src="' + imgArray.data[i].images.fixed_height.url + 
+                    '" data-still="'+ imgArray.data[i].images.fixed_height_still.url + 
+                    '" data-animate="'+ imgArray.data[i].images.fixed_height.url + 
+                    '" data-state="animate"' +
+                    '" alt="Image" class="img-rounded">';
 
 					if (i == 3) {
 					 $("#first-col").append(img);  
@@ -131,7 +135,7 @@
 		        var queryURL = "http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=";
 		        var buttonClicked = this;
 
-		        // Get the text of the button that was clicked
+		        // Get the text of the button that was clicked, which is the Category
 		        selectedCategory = buttonClicked.value; 
 		        console.log("Giphy Category: " + selectedCategory);
 		        queryURL += selectedCategory;
@@ -146,27 +150,15 @@
 
             // If image was clicked and the gif is animated, show the still gif, otherwise, show animated gif
 		    $('body').on('click','img', function() {
-		    	var src = $(this).attr('src');
-		    	var animated = true;
-		    	console.log(src);
+                var state = $(this).attr("data-state");
 
-		    	if (src.includes("_s.gif")) {
-		    		animated = false;
-		    		console.log("still")
-		    	}
-		    	else {
-		    		animated = true;
-		    		console.log("animated")
-		    	}
-
-		    	if (animated) {
-		    		$(this).attr("src", src.replace(".gif", "_s.gif"));
-		    		animated = false;
-		    	}
-		    	else {
-		    		$(this).attr("src", src.replace("_s.gif", ".gif"));
-		    		animated = true;
-		    	}
+                if (state == "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else if (state == "animate") {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
 		    });
 
 		    displayButtons();
